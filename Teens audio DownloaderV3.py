@@ -91,13 +91,8 @@ def download(href,header,soup,res,fpath):
 
 root = tk.Tk()
 root.title("报纸音频下载器")
-import sys
-bundle_dir = getattr(sys, '_MEIPASS')
  
 
-data_file_path = os.path.join(bundle_dir)
-path=os.path.join(bundle_dir,'icon.ico')
-root.iconbitmap(path)
 root.geometry("900x300")
 gradevar = tk.StringVar()
 
@@ -123,4 +118,28 @@ input_entry.pack(pady=10)
 input_button = tk.Button(root, text="下载特定期数Teens", command=on_input_button_click)
 input_button.pack(pady=10)
 
-root.mainloop()
+root.mainloop()# 创建单选按钮
+grades = [("初一", "1"), ("初二", "2"), ("初三", "3")]
+for text, value in grades:
+    tk.Radiobutton(root, text=text, variable=gradevar, value=value).pack()
+
+# 创建标签
+label = tk.Label(root, text="")
+label.pack(pady=10)
+
+# 创建下载最新Teens按钮
+button = tk.Button(root, text="点击下载最新Teens", command=on_button_click)
+button.pack(pady=10)
+
+# 创建特定期数输入框
+input_entry = tk.Entry(root, width=4)
+input_entry.pack(pady=10)
+
+# 创建下载特定期数Teens按钮
+input_button = tk.Button(root, text="下载特定期数Teens", command=on_input_button_click)
+input_button.pack(pady=10)
+
+try:
+    root.mainloop()
+except Exception as e:
+    messagebox.showerror("错误", f"程序出现异常: {str(e)}")
